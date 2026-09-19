@@ -1,0 +1,166 @@
+ШПАРГАЛКА ПО GIT (лабораторная работа №2)
+
+
+НАСТРОЙКА
+
+git config --global user.name "ваш_ник"
+    Настройка имени пользователя для подписи коммитов.
+
+git config --global user.email "ваша_почта@example.com"
+    Настройка email для подписи коммитов.
+
+git version
+    Проверка установленной версии Git.
+
+
+СОЗДАНИЕ РЕПОЗИТОРИЯ
+
+git init -b main
+    Создать локальный репозиторий с основной веткой main.
+
+git status
+    Показать состояние рабочей директории и индекса.
+
+git log
+    Показать историю коммитов.
+
+git log --oneline
+    Компактная история (сокращённый хеш + сообщение).
+
+git show <хеш>
+    Детальный разбор конкретного коммита (с diff).
+
+
+ДОБАВЛЕНИЕ И КОММИТ
+
+git add .
+    Добавить все изменения в индекс (staging area).
+
+git add <файл>
+    Добавить конкретный файл в индекс.
+
+git commit -m "сообщение"
+    Создать коммит с описанием изменений.
+
+git commit -am "сообщение"
+    Добавить изменённые (отслеживаемые) файлы и сразу закоммитить.
+
+
+РАБОТА С ВЕТКАМИ
+
+git branch
+    Показать список локальных веток (* — текущая).
+
+git branch -a
+    Показать все ветки, включая удалённые.
+
+git checkout -b new-feature    (устаревший)
+git switch -c new-feature      (современный)
+    Создать ветку и переключиться на неё.
+
+git switch main
+    Переключиться на существующую ветку.
+
+git switch -
+    Переключиться на предыдущую ветку.
+
+git branch -d hotfix
+    Безопасно удалить слитую ветку.
+
+git branch -D feature
+    Принудительно удалить ветку.
+
+
+УДАЛЁННЫЙ РЕПОЗИТОРИЙ
+
+git remote add origin <URL>
+    Привязать удалённый репозиторий.
+
+git remote -v
+    Показать адреса удалённых репозиториев (fetch/push).
+
+git push -u origin main
+    Отправить ветку main и установить upstream.
+
+git push --set-upstream origin feature
+    Отправить новую ветку feature и установить upstream.
+
+git push
+    Отправить изменения (после настройки upstream).
+
+git pull
+    Получить и слить изменения из удалённого репозитория.
+
+git fetch --prune
+    Получить информацию об удалённых ветках и удалить
+    ссылки на несуществующие ветки.
+
+
+ПРОСМОТР ИЗМЕНЕНИЙ
+
+git diff
+    Показать незакоммиченные изменения.
+
+git diff --staged
+    Показать изменения, добавленные в индекс.
+
+
+ИГНОРИРОВАНИЕ
+
+.gitignore
+    Файл, в котором перечисляются игнорируемые файлы/папки.
+    Пример содержимого:
+        bin/
+        obj/
+        .vs/
+        *.user
+
+
+ПОЛЕЗНЫЕ СОВЕТЫ
+
+1. Выход из git log (pager less): нажать q.
+2. Перед push всегда делайте git pull.
+3. Для .NET-проектов добавляйте bin/ и obj/ в .gitignore.
+4. Ветку feature после слияния можно удалить локально
+   (git branch -D feature).
+5. git switch -c <имя> — современная замена git checkout -b.
+
+
+МОИ ПРИМЕРЫ ИЗ ЛАБОРАТОРНОЙ РАБОТЫ
+
+Работа с github
+
+git remote add origin https://github.com/Alexandraa19/Lab2-Git_Perekhrest.git
+git push -u origin main
+git push --set-upstream origin feature
+
+Работа с git-practice-Perekhrest
+
+git init -b main
+git add README.md
+git commit -m "Initial commit: add README.md"
+git switch -c sasha
+echo 'print("Hello, Git!")' > hello.py
+git add hello.py
+git commit -m "Add oxae with greeting"
+git push --set-upstream origin sasha
+git branch -a
+git log --oneline
+
+
+ПРОБЛЕМЫ И РЕШЕНИЯ
+
+Проблема: git push выдаёт "fatal: The current branch has no upstream branch"
+Решение: git push --set-upstream origin <имя_ветки>
+
+Проблема: терминал завис с символом ":" внизу
+Решение: нажать q (выход из pager less)
+
+Проблема: нужно игнорировать bin/ и obj/ в .NET
+Решение: создать .gitignore с содержимым:
+    bin/
+    obj/
+    .vs/
+
+Проблема: файл создался как README.md.txt
+Решение: mv README.md.txt README.md
